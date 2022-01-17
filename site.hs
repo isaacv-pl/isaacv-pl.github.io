@@ -5,13 +5,8 @@ import           Hakyll
 
 
 --------------------------------------------------------------------------------
-config :: Configuration
-config = defaultConfiguration
-  { destinationDirectory = "docs"
-  }
-
 main :: IO ()
-main = hakyllWith config $ do
+main = hakyll $ do
     match "images/*" $ do
         route   idRoute
         compile copyFileCompiler
@@ -62,7 +57,7 @@ main = hakyllWith config $ do
                 >>= loadAndApplyTemplate "templates/default.html" indexCtx
                 >>= relativizeUrls
 
-    match "templates/*" $ compile templateCompiler
+    match "templates/*" $ compile templateBodyCompiler
 
 
 --------------------------------------------------------------------------------
@@ -70,4 +65,3 @@ postCtx :: Context String
 postCtx =
     dateField "date" "%B %e, %Y" `mappend`
     defaultContext
-
