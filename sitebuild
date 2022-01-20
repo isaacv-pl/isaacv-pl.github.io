@@ -1,4 +1,8 @@
 #!/bin/bash
 
+git pull
 stack exec site clean
 stack exec site build
+git add *
+git commit
+git push
